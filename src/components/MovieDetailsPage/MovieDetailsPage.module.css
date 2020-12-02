@@ -13,6 +13,11 @@
   font-weight: 500;
   font-size: 13px;
 }
+
+.btn:hover {
+  background-color: rgba(255, 99, 71, 0.562);
+  border-color: rgba(255, 99, 71, 0.753);
+}
 .movieDetails {
   display: flex;
   padding-bottom: 25px;

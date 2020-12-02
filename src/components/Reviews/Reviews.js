@@ -18,7 +18,6 @@ class Cast extends Component {
   }
   render() {
     const { reviews } = this.state;
-    console.log(reviews);
     if (!reviews) {
       return <ImageLoader />;
     } else {

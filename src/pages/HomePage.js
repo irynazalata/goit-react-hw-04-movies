@@ -8,6 +8,7 @@ class HomePage extends Component {
   state = {
     movies: [],
     loading: false,
+    error: '',
   };
 
   componentDidMount() {
@@ -22,7 +23,7 @@ class HomePage extends Component {
   }
 
   render() {
-    const { movies, loading } = this.state;
+    const { movies, loading, error } = this.state;
     const items = movies.map(movie => {
       let name = movie.title || movie.name;
       return (
@@ -60,6 +61,7 @@ class HomePage extends Component {
         <div className="container">
           <h2 className="title">Trending today</h2>
           {loading && <ImageLoader />}
+          {error && <h3>Oops, something went wrong. Try again! </h3>}
           <ul className="list">{items}</ul>
         </div>
       </>

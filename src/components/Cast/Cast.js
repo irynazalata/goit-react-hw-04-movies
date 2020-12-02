@@ -32,7 +32,7 @@ class Cast extends Component {
           : (img =
               'https://rimatour.com/wp-content/uploads/2017/09/No-image-found.jpg');
         return (
-          <li key={cast.id} className={styles.listItem}>
+          <li className={styles.listItem} key={cast.id}>
             <img src={img} alt={cast.name} className={styles.img} />
             <h3 className={styles.title}>{cast.name}</h3>
             <p>Character: {cast.character}</p>
