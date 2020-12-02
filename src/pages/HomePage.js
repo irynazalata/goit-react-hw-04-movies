@@ -1,31 +1,37 @@
 import React, { Component } from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import ImageLoader from '../shared/Loader/Loader';
 
 import baseHttpService from '../services/moviesApi';
 
 class HomePage extends Component {
   state = {
     movies: [],
+    loading: false,
   };
 
   componentDidMount() {
-    baseHttpService.fetchPopularMovies().then(({ results }) => {
-      this.setState({ movies: results });
-    });
+    this.setState({ loading: true });
+    baseHttpService
+      .fetchPopularMovies()
+      .then(({ results }) => {
+        this.setState({ movies: results });
+      })
+      .catch(error => this.setState({ error }))
+      .finally(() => this.setState({ loading: false }));
   }
 
   render() {
-    const { movies } = this.state;
+    const { movies, loading } = this.state;
     const items = movies.map(movie => {
       let name = movie.title || movie.name;
       return (
-        <li className="list-item">
+        <li className="list-item" key={movie.id}>
           <Link
             to={{
               pathname: `/movies/${movie.id}`,
               state: { from: this.props.location },
             }}
-            key={movie.id}
           >
             {name}
           </Link>
@@ -53,6 +59,7 @@ class HomePage extends Component {
         </div>
         <div className="container">
           <h2 className="title">Trending today</h2>
+          {loading && <ImageLoader />}
           <ul className="list">{items}</ul>
         </div>
       </>

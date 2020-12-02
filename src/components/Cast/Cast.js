@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ImageLoader from '../../shared/Loader/Loader';
 
 import baseHttpService from '../../services/moviesApi';
 import styles from './Cast.module.css';
@@ -6,21 +7,23 @@ import styles from './Cast.module.css';
 class Cast extends Component {
   state = {
     cast: [],
+    loading: false,
   };
 
   componentDidMount() {
     const { match } = this.props;
     const { movieId } = match.params;
+    this.setState({ loading: true });
     baseHttpService.fetchMovieCast(movieId).then(({ cast }) => {
-      this.setState({ cast });
+      this.setState({ cast, loading: false });
     });
   }
+
+  componentWillUnmount() {
+    this.setState({ loading: false });
+  }
   render() {
-    const { cast } = this.state;
-
-    console.log(cast.profile_path);
-
-    console.log(cast);
+    const { cast, loading } = this.state;
     if (cast) {
       const items = cast.map(cast => {
         let img;
@@ -36,7 +39,12 @@ class Cast extends Component {
           </li>
         );
       });
-      return <ul className={styles.list}>{items}</ul>;
+      return (
+        <>
+          {loading && <ImageLoader />}
+          <ul className={styles.list}>{items}</ul>;
+        </>
+      );
     }
   }
 }

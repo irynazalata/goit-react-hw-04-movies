@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import queryString from 'query-string';
+import ImageLoader from '../shared/Loader/Loader';
 
 import baseHttpService from '../services/moviesApi';
 import '../index.css';
@@ -9,6 +10,7 @@ class MoviesPage extends Component {
   state = {
     movies: [],
     query: '',
+    loading: false,
   };
 
   componentDidMount() {
@@ -23,11 +25,9 @@ class MoviesPage extends Component {
   componentDidUpdate(prevProps, prevState) {
     const { query: prevQuery } = queryString.parse(prevProps.location.search);
     const { query: nextQuery } = queryString.parse(this.props.location.search);
-    console.log(prevQuery);
-    console.log(nextQuery);
     if (prevQuery !== nextQuery) {
       baseHttpService.fetchMoviesWithQuery(nextQuery).then(({ results }) => {
-        this.setState({ movies: results });
+        this.setState({ movies: results, loading: false });
       });
     }
   }
@@ -41,6 +41,7 @@ class MoviesPage extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    this.setState({ loading: true });
     this.props.history.push({
       ...this.props.location,
       search: `query=${this.state.query}`,
@@ -53,17 +54,16 @@ class MoviesPage extends Component {
   };
 
   render() {
-    const { query, movies } = this.state;
+    const { query, movies, loading } = this.state;
     const items = movies.map(movie => {
       let name = movie.title || movie.name;
       return (
-        <li className="list-item">
+        <li className="list-item" key={movie.id}>
           <Link
             to={{
               pathname: `/movies/${movie.id}`,
               state: { from: this.props.location, query: query },
             }}
-            key={movie.id}
           >
             {name}
           </Link>
@@ -106,6 +106,7 @@ class MoviesPage extends Component {
             <input type="submit" value="Search" className="button" />
           </form>
         </div>
+        {loading && <ImageLoader />}
         <ul className="list">{items}</ul>
       </>
     );
