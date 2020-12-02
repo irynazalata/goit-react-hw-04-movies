@@ -3,6 +3,7 @@ import { NavLink, Link } from 'react-router-dom';
 import ImageLoader from '../shared/Loader/Loader';
 import '../index.css';
 import baseHttpService from '../services/moviesApi';
+import Header from '../components/Header/Header';
 
 class HomePage extends Component {
   state = {
@@ -41,23 +42,7 @@ class HomePage extends Component {
     });
     return (
       <>
-        <div className="navigation-link-container">
-          <NavLink
-            exact
-            to="/"
-            className="navigation-link"
-            activeClassName="navigation-link-active"
-          >
-            Home
-          </NavLink>
-          <NavLink
-            to="/movies"
-            className="navigation-link"
-            activeClassName="navigation-link-active"
-          >
-            Movies
-          </NavLink>
-        </div>
+        <Header />
         <div className="container">
           <h2 className="title">Trending today</h2>
           {loading && <ImageLoader />}

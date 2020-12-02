@@ -1,0 +1,15 @@
+.navigationLinkContainer {
+  margin-top: 30px;
+  margin-left: 30px;
+}
+.navigationLink {
+  text-decoration: none;
+  color: #000000;
+  margin-right: 20px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.navigationLinkActive {
+  color: #ff6347;
+}

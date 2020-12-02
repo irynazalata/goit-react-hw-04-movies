@@ -4,16 +4,18 @@ import MoviesPage from './pages/MoviesPage';
 import MovieDetailsPage from './components/MovieDetailsPage/MovieDetailsPage';
 import Cast from './components/Cast/Cast';
 import Reviews from './components/Reviews/Reviews';
+import routes from './routes';
+
 const App = () => (
   <>
     <Switch>
-      <Route path="/" exact component={HomePage}></Route>
-      <Route path="/movies" exact component={MoviesPage}></Route>
+      <Route path={routes.home} exact component={HomePage}></Route>
+      <Route path={routes.movies} exact component={MoviesPage}></Route>
     </Switch>
-    <Route path="/movies/:movieId" component={MovieDetailsPage}></Route>
-    <Route path="/movies/:movieId/cast" component={Cast}></Route>
-    <Route path="/movies/:movieId/reviews" exact component={Reviews}></Route>
-    <Redirect to="/" />
+    <Route path={routes.movieDetails} component={MovieDetailsPage}></Route>
+    <Route path={routes.cast} component={Cast}></Route>
+    <Route path={routes.reviews} exact component={Reviews}></Route>
+    <Redirect to={routes.home} />
   </>
 );
 

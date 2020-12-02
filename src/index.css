@@ -12,22 +12,6 @@ code {
     monospace;
 }
 
-.navigation-link-container {
-  margin-top: 30px;
-  margin-left: 30px;
-}
-.navigation-link {
-  text-decoration: none;
-  color: #000000;
-  margin-right: 20px;
-  font-weight: 600;
-  font-size: 18px;
-}
-
-.navigation-link-active {
-  color: #ff6347;
-}
-
 .container {
   margin-top: 30px;
   border-bottom: solid 2px rgb(175, 175, 175);

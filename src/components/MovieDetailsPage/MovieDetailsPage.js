@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import ImageLoader from '../../shared/Loader/Loader';
+import routes from '../../routes';
 
 import baseHttpService from '../../services/moviesApi';
 import styles from './MovieDetailsPage.module.css';
@@ -33,7 +34,7 @@ class MovieDetailsPage extends Component {
       history.push(location.state.from);
       return;
     }
-    this.props.history.push('/');
+    this.props.history.push(routes.home);
   };
 
   render() {

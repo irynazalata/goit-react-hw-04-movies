@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import queryString from 'query-string';
 import ImageLoader from '../shared/Loader/Loader';
-
 import baseHttpService from '../services/moviesApi';
+import Header from '../components/Header/Header';
 import '../index.css';
 
 class MoviesPage extends Component {
@@ -97,23 +97,7 @@ class MoviesPage extends Component {
 
     return (
       <>
-        <div className="navigation-link-container">
-          <NavLink
-            exact
-            to="/"
-            className="navigation-link"
-            activeClassName="navigation-link-active"
-          >
-            Home
-          </NavLink>
-          <NavLink
-            to="/movies"
-            className="navigation-link"
-            activeClassName="navigation-link-active"
-          >
-            Movies
-          </NavLink>
-        </div>
+        <Header />
         <div>
           <form onSubmit={this.handleSubmit} className="form">
             <label className="label">
