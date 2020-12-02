@@ -35,9 +35,9 @@ class MoviesPage extends Component {
     }
   }
 
-  componentWillUnmount() {
-    this.setState({ movies: [], page: 1 });
-  }
+  // componentWillUnmount() {
+  //   this.setState({ movies: [], page: 1 });
+  // }
 
   fetchMovies = query => {
     const { page } = this.state;
@@ -133,14 +133,21 @@ class MoviesPage extends Component {
         {loading && <ImageLoader />}
         {error && (
           <h3 styles={{ marginLeft: '20px' }}>
-            Oops, something went wrong. Try again!{' '}
+            Oops, something went wrong. Try again!
           </h3>
         )}
         <ul className="list">{items}</ul>
         {movies.length > 0 &&
           total_pages > 1 &&
           page <= total_pages &&
-          !loading && <button onClick={this.fetchMovies}>Show more</button>}
+          !loading && (
+            <button
+              className="more-btn"
+              onClick={() => this.fetchMovies(query)}
+            >
+              Show more
+            </button>
+          )}
       </>
     );
   }

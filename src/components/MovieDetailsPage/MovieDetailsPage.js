@@ -8,28 +8,36 @@ import styles from './MovieDetailsPage.module.css';
 class MovieDetailsPage extends Component {
   state = {
     movie: '',
+    path: '',
+    search: '',
   };
 
   componentDidMount() {
     const { match } = this.props;
     const { movieId } = match.params;
     baseHttpService.fetchMovieDetails(movieId).then(movie => {
-      this.setState({ movie });
+      this.setState({
+        movie,
+        path: this.props.location.state.from.pathname,
+        search: this.props.location.state.from.search,
+      });
     });
   }
 
   handleGoBack = () => {
     const { history, location } = this.props;
+
     if (location.state) {
-      history.goBack();
+      location.state.from.search = this.state.search;
+      location.state.from.pathname = this.state.path;
+      history.push(location.state.from);
       return;
     }
-
     this.props.history.push('/');
   };
 
   render() {
-    const { movie } = this.state;
+    const { movie, path } = this.state;
     const date = Number.parseInt(movie.release_date);
     let genres;
     if (movie.genres) {
@@ -37,6 +45,9 @@ class MovieDetailsPage extends Component {
     }
     return movie ? (
       <div className="container">
+        {/* <NavLink to={`/movies?query=${path}`} className={styles.btn}>
+          Go Back
+        </NavLink> */}
         <button
           type="button"
           onClick={this.handleGoBack}
@@ -69,6 +80,7 @@ class MovieDetailsPage extends Component {
                 exact
                 to={{
                   pathname: `/movies/${movie.id}/cast`,
+                  state: { from: this.props.location },
                 }}
                 className={styles.link}
                 activeClassName={styles.activeLink}
@@ -81,6 +93,7 @@ class MovieDetailsPage extends Component {
                 exact
                 to={{
                   pathname: `/movies/${movie.id}/reviews`,
+                  state: { from: this.props.location },
                 }}
                 className={styles.link}
                 activeClassName={styles.activeLink}
