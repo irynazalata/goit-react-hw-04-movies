@@ -8,7 +8,7 @@ const routes = [
     component: lazy(() => import('./pages/HomePage')),
   },
   {
-    exact: false,
+    exact: true,
     label: 'Movies',
     path: '/movies',
     component: lazy(() => import('./pages/MoviesPage')),
