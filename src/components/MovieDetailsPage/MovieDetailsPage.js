@@ -44,12 +44,18 @@ class MovieDetailsPage extends Component {
     const date = Number.parseInt(movie.release_date);
     let genres;
     let overview;
+    let img;
     if (movie.genres) {
       genres = movie.genres.map(genre => genre.name).join(' ');
     }
     movie.overview
       ? (overview = movie.overview)
       : (overview = 'No overview found for this movie');
+
+    movie.poster_path
+      ? (img = `https://image.tmdb.org/t/p/w300/${movie.poster_path}`)
+      : (img =
+          'https://rimatour.com/wp-content/uploads/2017/09/No-image-found.jpg');
     return movie ? (
       <>
         <Header />
@@ -62,11 +68,7 @@ class MovieDetailsPage extends Component {
             Go Back
           </button>
           <div className={styles.movieDetails}>
-            <img
-              src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}
-              className={styles.poster}
-              alt={movie.title}
-            />
+            <img src={img} className={styles.poster} alt={movie.title} />
             <div>
               <h2 className={styles.name}>
                 {movie.title}({date})
