@@ -4,7 +4,7 @@ import ImageLoader from '../../shared/Loader/Loader';
 import baseHttpService from '../../services/moviesApi';
 import styles from './Reviews.module.css';
 
-class Cast extends Component {
+class Reviews extends Component {
   state = {
     reviews: null,
   };
@@ -24,7 +24,7 @@ class Cast extends Component {
       if (reviews.length > 0) {
         const items = reviews.map(review => {
           return (
-            <li className={styles.listItem}>
+            <li className={styles.listItem} key={reviews.id}>
               <h3 className={styles.title}>Author: {review.author}</h3>
               <p>{review.content}</p>
             </li>
@@ -42,4 +42,4 @@ class Cast extends Component {
   }
 }
 
-export default Cast;
+export default Reviews;

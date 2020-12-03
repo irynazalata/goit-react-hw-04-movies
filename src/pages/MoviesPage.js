@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 import ImageLoader from '../shared/Loader/Loader';
 import baseHttpService from '../services/moviesApi';
@@ -34,10 +34,6 @@ class MoviesPage extends Component {
       this.fetchMovies(nextQuery);
     }
   }
-
-  // componentWillUnmount() {
-  //   this.setState({ movies: [], page: 1 });
-  // }
 
   fetchMovies = query => {
     const { page } = this.state;

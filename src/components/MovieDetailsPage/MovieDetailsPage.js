@@ -23,6 +23,7 @@ class MovieDetailsPage extends Component {
         search: this.props.location.state.from.search,
       });
     });
+    // .catch(error => (error ? this.props.history.push('/') : ''));
   }
 
   handleGoBack = () => {
@@ -38,7 +39,7 @@ class MovieDetailsPage extends Component {
   };
 
   render() {
-    const { movie, path } = this.state;
+    const { movie } = this.state;
     const date = Number.parseInt(movie.release_date);
     let genres;
     if (movie.genres) {
@@ -46,9 +47,6 @@ class MovieDetailsPage extends Component {
     }
     return movie ? (
       <div className="container">
-        {/* <NavLink to={`/movies?query=${path}`} className={styles.btn}>
-          Go Back
-        </NavLink> */}
         <button
           type="button"
           onClick={this.handleGoBack}

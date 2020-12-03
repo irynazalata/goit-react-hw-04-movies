@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ImageLoader from '../shared/Loader/Loader';
 import '../index.css';
 import baseHttpService from '../services/moviesApi';
