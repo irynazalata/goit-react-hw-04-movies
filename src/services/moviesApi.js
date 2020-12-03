@@ -5,7 +5,7 @@ class BaseHttpService {
   key = '401d61f37c17d956a98039a1a0734109';
   language = 'en-US';
   fetchPopularMovies = () => {
-    return this.get(`trending/all/day?api_key=${this.key}&adult=false`);
+    return this.get(`trending/movie/day?api_key=${this.key}&adult=false`);
   };
   fetchMoviesWithQuery = (searchQuery, page = 1) => {
     return this.get(
