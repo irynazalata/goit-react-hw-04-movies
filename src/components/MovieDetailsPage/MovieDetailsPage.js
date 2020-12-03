@@ -43,9 +43,13 @@ class MovieDetailsPage extends Component {
     const { movie } = this.state;
     const date = Number.parseInt(movie.release_date);
     let genres;
+    let overview;
     if (movie.genres) {
       genres = movie.genres.map(genre => genre.name).join(' ');
     }
+    movie.overview
+      ? (overview = movie.overview)
+      : (overview = 'No overview found for this movie');
     return movie ? (
       <>
         <Header />
@@ -69,7 +73,7 @@ class MovieDetailsPage extends Component {
               </h2>
               <p>User score: {movie.vote_average * 10}%</p>
               <h3>Overview</h3>
-              <p>{movie.overview}</p>
+              <p>{overview}</p>
               <h3>Genres</h3>
               <p>{genres}</p>
             </div>
